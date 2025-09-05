@@ -11,7 +11,11 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/forget-password")
 public class ForgotPasswordController extends HttpServlet {
-    private UserService userService = new UserServiceImpl();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private UserService userService = new UserServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -39,8 +43,6 @@ public class ForgotPasswordController extends HttpServlet {
             msg = "Đổi mật khẩu thành công.";
             req.setAttribute("msg", msg);
         } else {
-            // Trường hợp không tìm user hoặc lỗi DB -> nhưng theo yêu cầu bạn có thể vẫn coi là thành công.
-            // Ở đây tôi báo lỗi nếu DB không cập nhật (ví dụ k kết nối được)
             err = "Không thể đổi mật khẩu (lỗi hệ thống).";
             req.setAttribute("err", err);
         }

@@ -2,29 +2,28 @@ package hau.vn.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DBConnect {
-	 private final String serverName = "localhost";
-	 private final String dbName = "";
-	 private final String portNumber = "1433";
-	 private final String instance = "";
-	 private final String userID= "";
-	 private final String password= "";
 
-	public Connection getConnection() throws Exception {
-		 String url = "jdbc:sqlserver://" + serverName + "\\" + instance + ":" + portNumber +";encrypt=true;trustServerCertificate=true;databaseName=" + dbName;
-		 if (instance == null || instance.trim().isEmpty())
-		 url = "jdbc:sqlserver://"+serverName+":"+portNumber +";databaseName="+dbName;
-		 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		 return DriverManager.getConnection(url, userID, password);
+	private final String serverName = "DESKTOP-3TP8C70";
+	private final String dbName = "SinhVien";
+	private final String portNumber = "1433";
+	private final String instance = "";
+	private final String userID = "sa";
+	private final String password = "123456";
+
+	public Connection getConnection() throws SQLException, ClassNotFoundException {
+		String url;
+		if (instance == null || instance.trim().isEmpty()) {
+			url = "jdbc:sqlserver://" + serverName + ":" + portNumber + ";databaseName=" + dbName
+					+ ";encrypt=true;trustServerCertificate=true;";
+		} else {
+			url = "jdbc:sqlserver://" + serverName + "\\" + instance + ":" + portNumber + ";databaseName=" + dbName;
+		}
+
+		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		return DriverManager.getConnection(url, userID, password);
 	}
-	
-	public static void main(String[] args) {
-		 try {
-		 System.out.println(new DBConnect().getConnection());
-		 } catch (Exception e) {
-		 e.printStackTrace();
-		 }
-	 }
 }
 

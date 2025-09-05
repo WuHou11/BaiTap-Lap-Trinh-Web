@@ -1,42 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Đặt lại mật khẩu</title>
 </head>
 <body>
-	<form action="forget-password" method="post">
-		<h2>Quên mật khẩu</h2>
-		<c:if test="${msg != null}">
-			<h3 class="alert alert-success">${msg}</h3>
-		</c:if>
-		<c:if test="${err != null}">
-			<h3 class="alert alert-danger">${err}</h3>
-		</c:if>
+	<h2>Đặt lại mật khẩu</h2>
 
-		<section>
-			<label class="input login-input">
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-user"></i></span> <input
-						type="text" placeholder="Email hoặc Username" name="identifier"
-						class="form-control">
-				</div>
-			</label>
-		</section>
+	<c:if test="${not empty message}">
+		<p style="color:green;">${message}</p>
+	</c:if>
 
-		<section>
-			<label class="input login-input">
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-lock"></i></span> <input
-						type="password" placeholder="Mật khẩu mới" name="newPassword"
-						class="form-control">
-				</div>
-			</label>
-		</section>
+	<c:if test="${not empty error}">
+		<p style="color:red;">${error}</p>
+	</c:if>
 
-		<button type="submit">Đổi mật khẩu</button>
+	<form action="${pageContext.request.contextPath}/forget" method="post">
+		<label>Email:</label><br>
+		<input type="text" name="email" required><br><br>
+
+		<label>Username:</label><br>
+		<input type="text" name="username" required><br><br>
+
+		<label>Số điện thoại:</label><br>
+		<input type="text" name="phone" required><br><br>
+
+		<label>Mật khẩu mới:</label><br>
+		<input type="password" name="newPassword" required><br><br>
+
+		<button type="submit">Cập nhật mật khẩu</button>
 	</form>
+
+	<p>
+		<a href="${pageContext.request.contextPath}/login.jsp">Quay lại đăng nhập</a>
+	</p>
 </body>
 </html>

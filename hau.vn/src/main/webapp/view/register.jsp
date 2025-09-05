@@ -1,27 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Đăng ký tài khoản</title>
 </head>
 <body>
-	register
-	<form action="register" method="post">
-		<h2>Tạo tài khoản mới</h2>
-		<c:if test="${alert != null}">
-			<h3 class="alert alert-danger">${alert}</h3>
-		</c:if>
+    <h2>Đăng ký</h2>
 
-		<input type="text" name="username" placeholder="Tài khoản" required />
-		<input type="password" name="password" placeholder="Mật khẩu" required />
-		<input type="text" name="fullname" placeholder="Họ tên" required /> <input
-			type="email" name="email" placeholder="Email" required /> <input
-			type="text" name="phone" placeholder="Số điện thoại" required />
+    <!-- Thông báo lỗi nếu có -->
+    <c:if test="${not empty error}">
+        <p style="color:red;">${error}</p>
+    </c:if>
 
-		<button type="submit">Đăng ký</button>
-	</form>
+    <!-- Form đăng ký -->
+    <form action="${pageContext.request.contextPath}/register" method="post">
+        <p>
+            <label>Email:</label><br>
+            <input type="text" name="email" required>
+        </p>
+        <p>
+            <label>Username:</label><br>
+            <input type="text" name="username" required>
+        </p>
+        <p>
+            <label>Họ tên:</label><br>
+            <input type="text" name="fullname" required>
+        </p>
+        <p>
+            <label>Mật khẩu:</label><br>
+            <input type="password" name="password" required>
+        </p>
+        <p>
+            <label>Số điện thoại:</label><br>
+            <input type="text" name="phone">
+        </p>
+        <p>
+            <button type="submit">Đăng ký</button>
+        </p>
+    </form>
 
+    <!-- Link quay lại login -->
+    <p>
+        Đã có tài khoản? 
+        <a href="${pageContext.request.contextPath}/login.jsp">Đăng nhập</a>
+    </p>
 </body>
 </html>
